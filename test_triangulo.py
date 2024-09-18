@@ -8,6 +8,7 @@ class Triangulotest(unittest.TestCase):
         self.context = self.browser.new_context()
         self.page = self.context.new_page()
         self.page.goto("https://vanilton.net/web-test/triangulo_v2/")
+        self.context.set_default_timeout(5_000)
 
     def test_triangulo_equilatero(self):
         page = self.page
@@ -28,6 +29,8 @@ class Triangulotest(unittest.TestCase):
         page.get_by_label("Lado C:").click()
         page.get_by_label("Lado C:").fill("2")
         page.get_by_role("button", name="Validar").click()
+        self.assertTrue(page.get_by_text("Triângulo Isósceles",exact=True).is_visible())
+
 
     def test_triangulo_escaleno(self):
         page = self.page
@@ -39,6 +42,7 @@ class Triangulotest(unittest.TestCase):
         page.get_by_label("Lado C:").click()
         page.get_by_label("Lado C:").fill("2")
         page.get_by_role("button", name="Validar").click()
+
 
 
     def tearDown(self) -> None:
